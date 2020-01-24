@@ -1,6 +1,7 @@
 package com.manso.cursomc.services;
 
 import com.manso.cursomc.domain.Categoria;
+import com.manso.cursomc.exception.ObjectNotFoundException;
 import com.manso.cursomc.repositories.CategoriaRepository;
 import com.manso.cursomc.resources.CategoriaResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class CategoriaService {
 
     public Categoria buscar(Integer id) {
         Optional<Categoria> obj = repo.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()
+        ));
     }
+
 }
