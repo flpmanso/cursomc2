@@ -1,7 +1,7 @@
 package com.manso.cursomc.resources;
 
-import com.manso.cursomc.domain.Categoria;
-import com.manso.cursomc.services.CategoriaService;
+import com.manso.cursomc.domain.Cliente;
+import com.manso.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/categorias")
+@RequestMapping(value = "/clientes")
 
-public class CategoriaResource {
+public class ClienteResource {
 
     @Autowired
-    private CategoriaService service;
+    private ClienteService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> find(@PathVariable Integer id){
 
-        Categoria obj = service.buscar(id);
+        Cliente obj = service.buscar(id);
         return ResponseEntity.ok().body(obj);
     }
 }
