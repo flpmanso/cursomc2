@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,10 @@ public class CategoriaService {
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()
         ));
+    }
+
+    public List<Categoria> findAll() {
+        return repo.findAll();
     }
 
     public Categoria insert(Categoria obj) {
@@ -38,8 +43,7 @@ public class CategoriaService {
         find(id);
         try {
             repo.deleteById(id);
-        }
-        catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("não é possivel excluir uma categoria que possui produtos.");
         }
     }
