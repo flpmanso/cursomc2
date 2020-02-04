@@ -1,6 +1,7 @@
 package com.manso.cursomc.services;
 
 import com.manso.cursomc.domain.Categoria;
+import com.manso.cursomc.dto.CategoriaDTO;
 import com.manso.cursomc.exception.DataIntegrityException;
 import com.manso.cursomc.exception.ObjectNotFoundException;
 import com.manso.cursomc.repositories.CategoriaRepository;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,5 +57,9 @@ public class CategoriaService {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("não é possivel excluir uma categoria que possui produtos.");
         }
+    }
+
+    public Categoria fromDTO(CategoriaDTO objDto) {
+        return new Categoria(objDto.getId(), objDto.getNome());
     }
 }
